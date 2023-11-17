@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<header>
+    <div class="navbar bg-base-100 w-[1920px] h-[100px] flex justify-between px-32 bg-white text-black font-bold ">
+        <div class="navbar-start">
+            <a href="#" class="h-[100px] "
+            ><img
+                    src="https://i.postimg.cc/ydv1Q2Wt/car-poor-logo-img-black.png"
+                    alt=""
+                    class="w-full h-full"
+            /></a>
+        </div>
+        <div class="navbar-center hidden lg:flex ">
+            <ul class="menu menu-horizontal px-1 text-xl">
+                <li><a>모델</a></li>
+                <li><a>이벤트</a></li>
+                <li><a>디지털/고객지원</a></li>
+                <li><a>브랜드</a></li>
+            </ul>
+
+        </div>
+        <div class="navbar-end">
+            <ul class="menu menu-horizontal px-1">
+                <li>
+                    <details>
+                        <summary class="w-[80px]">
+                            <img src="https://i.postimg.cc/1RHr5RT4/free-icon-user.png" class="w-full h-full"  alt="">
+                        </summary>
+                        <ul class="p-2 bg-base-100">
+                            <li class="w-[120px]"><a class="nav-link text-base" sec:authorize="isAnonymous()" th:href="@{/member/sign}">로그인</a>
+                                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a></li>
+                            <li class="w-[120px]">
+                                <a class="nav-link text-base" sec:authorize="isAuthenticated()" th:href="@{/member/sign}">my page</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+
+
+        </div>
+
+    </div>
+</header>
+<body class="flex flex-col justify-center items-center">
+<div class="container2 flex justify-start    pt-5 w-[80%] h-[65vh] ">
+    <div class="box1    flex flex-col items-center w-64 h-full mr-5 ml-28" >
+
+        <div class="welcome    h-22 w-44 mt-12 mb-5">
+            <span class="text-3xl">MY PAGE</span>
+            <div class="inline-block text-blue-300 text-3xl" th:text="${member.name}"></div> <span class="text-3xl">님</span>
+        </div>
+
+
+        <ul class="menu bg-base-200 w-48 rounded-box">
+            <li>
+                <details open>
+                    <summary>회원 서비스</summary>
+                    <ul>
+                        <li><a>내 질문 보기</a></li>
+                        <li><a>모든 질문 보기</a></li>
+                        <li><a>내 견적 보기</a></li>
+
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details open>
+                    <summary>회원 정보</summary>
+                    <ul>
+                        <li><a>회원정보 수정</a></li>
+                    </ul>
+                </details>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <div class="box2    w-9/12 flex flex-col items-center h-full mr-auto" >
+
+        <div class="top3 w-[80%] flex flex-row items-center h-24 mt-10 mb-5 flex justify-around"  >
+
+            <a href="" class="btn bg-black text-white join-item text-xl w-72 h-16">회원 정보</a>
+
+            <a href="" class="btn join-item text-xl w-72 h-16">내 게시글 보기</a>
+
+            <a href="" class="btn join-item text-xl w-72 h-16">내 견적 보기</a>
+
+        </div>
+
+        <div class="middle6 card bg-gray-100 text-black text-xl pt-5 w-[80%] h-[450px]">
+
+            <form class="relative" th:action="@{/member/modify}" th:object="${ModifyForm}" method="post" >
+                <span class="block   font-bold text-3xl w-64 h-12 ml-12 mb-5">회원 정보</span>
+                <div class="   flex flex-row pl-12 h-12 mb-5">
+                    <label class="  block w-28 h-12 font-bold flex items-center justify-left"> 이름 </label>
+                    <input type="text" placeholder="Type here" name="name" class="input input-bordered w-[70%] h-12 ml-[60px] font-bold flex items-center" th:value="${member.name}" />
+                </div>
+                <div class="   flex flex-row pl-12 h-12 mb-5">
+                    <label class=" block w-28 h-12 font-bold flex items-center justify-left"> 전화번호 </label>
+                    <input type="text" placeholder="Type here" name="phoneNumber" class="input input-bordered w-[70%] h-12 ml-[60px] font-bold flex items-center" th:value="${member.phoneNumber}" />
+                </div>
+                <div class=" flex flex-row pl-12 h-12 mb-5">
+                    <label class=" block w-28 h-12 font-bold flex items-center justify-left"> 비밀번호 </label>
+                    <input type="password" placeholder="새로운 비밀번호" name="password" id="password" class="input input-bordered w-[70%] h-12 ml-[60px] font-bold flex items-center" />
+                </div>
+                <div class="   flex flex-row pl-12 h-12 mb-5">
+                    <label class=" block w-28 h-12 font-bold flex items-center justify-left"> 비번 확인 </label>
+                    <input type="password" placeholder="새로운 비밀번호 확인" id="confirmPassword" class="input input-bordered w-[70%] h-12 ml-[60px] font-bold flex items-center"  />
+                </div>
+                <div class=" flex-row pl-5 h-5 mb-5 flex justify-center text-sm absolute left-[25%] text-red-600 hidden" id="error">비밀번호가 일치하지 않습니다.</div>
+                <div class=" flex-row pl-5 h-5 mb-5 flex justify-center text-sm absolute left-[25%] text-red-600 hidden" id="error2">비밀번호를 입력하세요.</div>
+
+                <span class="block  w-32 h-12 ml-auto mr-12 mb-5">
+                    <button type="submit" id="submitButton" class="btn bg-black hover:bg-purple-700 text-white">수정 완료</button>
+                </span>
+
+                <script>
+                    const passwordInput = document.getElementById('password');
+                    const confirmPasswordInput = document.getElementById('confirmPassword');
+                    const errorDiv = document.getElementById('error');
+                    const errorDiv2 = document.getElementById('error2');
+                    const submitButton = document.getElementById('submitButton');
+
+                    submitButton.addEventListener('click', function (e) {
+                        const password = passwordInput.value;
+                        const confirmPassword = confirmPasswordInput.value;
+
+                        if(password == '') {
+                            errorDiv2.classList.remove("hidden")
+                            errorDiv.classList.add("hidden")
+                            e.preventDefault();
+                        }
+
+                        if (password !== confirmPassword) {
+                            errorDiv.classList.remove("hidden")
+                            errorDiv2.classList.add("hidden")
+                            passwordInput.value = '';
+                            confirmPasswordInput.value = '';
+                            e.preventDefault(); // 폼 전송을 막음
+                        } else {
+                        }
+                    });
+
+                </script>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<footer class=" footer footer-center p-10 text-base-content rounded">
+    <nav class="grid grid-flow-col gap-4 text-base font-bold">
+        <a class="link link-hover">About us</a>
+        <a class="link link-hover">Contact</a>
+        <a class="link link-hover">Jobs</a>
+        <a class="link link-hover">Press kit</a>
+    </nav>
+    <nav class="text-xs">
+        <div class="grid grid-flow-col gap-4">
+            <p>(주)영규 | BIRTHDAY 1997-03-17 [happy birth day] | OWNER 영규 | 대전광역시 대덕구 중리동</p>
+        </div>
+        <div class="grid grid-flow-col gap-4">
+            <p>TEL 010-2282-3232 | EMAIL alsdudrb123@gmail.com | ONLINE PERMIT TO 대전 대덕구 | 영규(주)</p>
+        </div>
+    </nav>
+    <aside>
+        <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+    </aside>
+</footer>
+</body>
+</html>
+
+
+
+<style>
+
+    @font-face {
+        font-family: 'LeferiPoint-BlackA';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackA.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    html, body{
+    font-family: 'LeferiPoint-BlackA';
+    font-weight: 200;
+    }
+
+</style>
+
+

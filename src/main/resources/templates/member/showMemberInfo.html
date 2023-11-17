@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <title>Title</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<header>
+    <div class="navbar bg-base-100 w-[1920px] h-[100px] flex justify-between px-32 bg-white text-black font-bold ">
+        <div class="navbar-start">
+            <a href="#" class="h-[100px] "
+            ><img
+                    src="https://i.postimg.cc/ydv1Q2Wt/car-poor-logo-img-black.png"
+                    alt=""
+                    class="w-full h-full"
+            /></a>
+        </div>
+        <div class="navbar-center hidden lg:flex ">
+            <ul class="menu menu-horizontal px-1 text-xl">
+                <li><a>모델</a></li>
+                <li><a>이벤트</a></li>
+                <li><a>디지털/고객지원</a></li>
+                <li><a>브랜드</a></li>
+            </ul>
+
+        </div>
+        <div class="navbar-end">
+            <ul class="menu menu-horizontal px-1">
+                <li>
+                    <details>
+                        <summary class="w-[80px]">
+                            <img src="https://i.postimg.cc/1RHr5RT4/free-icon-user.png" class="w-full h-full"  alt="">
+                        </summary>
+                        <ul class="p-2 bg-base-100">
+                            <li class="w-[120px]"><a class="nav-link text-base" sec:authorize="isAnonymous()" th:href="@{/member/sign}">로그인</a>
+                                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a></li>
+                            <li class="w-[120px]">
+                                <a class="nav-link text-base" sec:authorize="isAuthenticated()" th:href="@{/member/sign}">my page</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+
+
+        </div>
+
+    </div>
+</header>
+<body class="flex flex-col justify-center items-center">
+<div class="container2 flex justify-start    pt-5 w-[80%] h-[65vh] ">
+    <div class="box1    flex flex-col items-center w-64 h-full mr-5 ml-28" >
+
+        <div class="welcome    h-22 w-44 mt-12 mb-5">
+            <span class="text-3xl">MY PAGE</span>
+            <div class="inline-block text-blue-300 text-3xl" th:text="${member.name}"></div> <span class="text-3xl">님</span>
+        </div>
+
+
+        <ul class="menu bg-base-200 w-48 rounded-box">
+            <li>
+                <details open>
+                    <summary>회원 서비스</summary>
+                    <ul>
+                        <li><a>내 질문 보기</a></li>
+                        <li><a href="/member/showAllList">모든 질문 보기</a></li>
+                        <li><a href="/car/myPage">내 견적 보기</a></li>
+
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details open>
+                    <summary>회원 정보</summary>
+                    <ul>
+                        <li><a>회원정보 수정</a></li>
+                    </ul>
+                </details>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <div class="box2    w-9/12 flex flex-col items-center h-full mr-auto" >
+
+        <div class="top3 w-[80%] flex flex-row items-center h-24 mt-10 mb-5 flex justify-around"  >
+
+            <a href="" class="btn bg-black text-white join-item text-xl w-72 h-16">회원 정보</a>
+
+            <div class=" join-item text-xl w-72 h-16">
+                <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+                <div class="drawer-content w-72 h-16">
+                    <!-- Page content here -->
+                    <label for="my-drawer" class="btn drawer-button text-xl w-72 h-16">질문 보기</label>
+                </div>
+                <div class="drawer-side">
+                    <label for="my-drawer" class="drawer-overlay"></label>
+                    <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+                        <!-- Sidebar content here -->
+                        <li><a href="/member/showList">내 질문 보기</a></li>
+                        <li><a href="/member/showAllList">모든 질문 보기</a></li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <a href="" class="btn join-item text-xl w-72 h-16">내 견적 보기</a>
+
+        </div>
+
+        <div class="middle6 card bg-gray-100 text-black text-xl pt-5 w-[80%] h-[450px]">
+
+            <span class="block   font-bold text-3xl w-64 h-12 ml-12 mb-5">회원 정보</span>
+            <div class="   flex flex-row pl-12 h-12 mb-5">
+                <label class="  block w-28 h-12 font-bold flex items-center justify-left"> 아이디 </label>
+                <div class="    w-full h-12 ml-24 font-bold flex items-center" th:text="${member.loginId}">  </div>
+            </div>
+            <div class="   flex flex-row pl-12 h-12 mb-5">
+                <label class=" block w-28 h-12 font-bold flex items-center justify-left"> 이름 </label>
+                <div class="    w-full h-12 ml-24 font-bold flex items-center" th:text="${member.name}">  </div>
+            </div>
+            <div class="   flex flex-row pl-12 h-12 mb-5">
+                <label class=" block w-28 h-12 font-bold flex items-center justify-left"> Email </label>
+                <div class="   w-full h-12 ml-24 font-bold flex items-center" th:text="${member.email}" >  </div>
+            </div>
+            <div class="   flex flex-row pl-12 h-12 mb-5">
+                <label class=" block w-28 h-12 font-bold flex items-center justify-left"> 전화번호 </label>
+                <div class="   w-full h-12 ml-24 font-bold flex items-center" th:text="${member.phoneNumber}" >  </div>
+            </div>
+            <span class="block  w-32 h-12 ml-auto mr-12 mb-5">
+                    <button class="btn btn-neutral hover:bg-purple-700" onclick="toggleEditUserInfoDiv()">회원정보 수정</button>
+                </span>
+
+        </div>
+
+    </div>
+</div>
+
+<footer class=" footer footer-center p-10 text-base-content rounded">
+    <nav class="grid grid-flow-col gap-4 text-base font-bold">
+        <a class="link link-hover">About us</a>
+        <a class="link link-hover">Contact</a>
+        <a class="link link-hover">Jobs</a>
+        <a class="link link-hover">Press kit</a>
+    </nav>
+    <nav class="text-xs">
+        <div class="grid grid-flow-col gap-4">
+            <p>(주)영규 | BIRTHDAY 1997-03-17 [happy birth day] | OWNER 영규 | 대전광역시 대덕구 중리동</p>
+        </div>
+        <div class="grid grid-flow-col gap-4">
+            <p>TEL 010-2282-3232 | EMAIL alsdudrb123@gmail.com | ONLINE PERMIT TO 대전 대덕구 | 영규(주)</p>
+        </div>
+    </nav>
+    <aside>
+        <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+    </aside>
+</footer>
+
+<div class="card w-[500px] bg-indigo-200 shadow-xl hidden" id="editUserInfoDiv">
+    <div class="card-body">
+        <h2 class="card-title">회원정보 수정</h2>
+        <p>회원정보 수정을 위해 현재 비밀번호를 입력해주세요</p>
+        <form id="myForm">
+            <input type="password" id="userInput" placeholder="현재 비밀번호 입력" class="input input-bordered input-info w-[380px] " />
+        </form>
+        <div class="card-actions justify-end justify-center mt-5">
+            <button class="btn btn-primary" onclick="toggleEditUserInfoDiv(); sendData();">확인</button>
+        </div>
+    </div>
+</div>
+
+<div class="overlay" id="overlay"></div>
+</body>
+
+<script>
+    function toggleEditUserInfoDiv() {
+        var editUserInfoDiv = document.getElementById("editUserInfoDiv");
+        var overlay = document.getElementById("overlay");
+
+        if (editUserInfoDiv.classList.contains("hidden")) {
+            editUserInfoDiv.classList.remove("hidden");
+            editUserInfoDiv.classList.add("absolute");
+            editUserInfoDiv.classList.add("z-50");
+            overlay.style.display = "block"; // 오버레이를 보이게 함
+        } else {
+            editUserInfoDiv.classList.remove("absolute");
+            editUserInfoDiv.classList.remove("z-50");
+            editUserInfoDiv.classList.add("hidden");
+            overlay.style.display = "none"; // 오버레이를 숨김
+        }
+    }
+
+    function sendData() {
+    var userInput = document.getElementById("userInput").value;
+
+    var header = $("meta[name='_csrf_header']").attr('content');
+    var token = $("meta[name='_csrf']").attr('content');
+
+    $.ajax({
+        type: "POST",
+        url: "/member/processInput", // Spring Boot 컨트롤러의 엔드포인트
+        beforeSend: function(xhr){
+        xhr.setRequestHeader(header, token);
+        },
+        contentType: "application/json",
+        data: JSON.stringify({ userInput: userInput }),
+        success: function (data2) {
+            if (data2.passed) {
+                // 통과한 경우 페이지 이동 등 필요한 동작 수행
+                window.location.href = "/member/modifyMemberInfo";
+            } else {
+                // 실패한 경우 경고 메시지 출력 등 필요한 동작 수행
+                alert("비밀번호가 일치하지 않습니다.");
+                window.location.reload();
+            }
+        },
+        error: function () {
+            // 서버 오류 처리
+            console.error("서버 오류");
+            }
+        });
+    }
+</script>
+
+</html>
+
+
+
+<style>
+
+    @font-face {
+        font-family: 'LeferiPoint-BlackA';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackA.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    html, body{
+    font-family: 'LeferiPoint-BlackA';
+    font-weight: 200;
+    }
+
+    .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* 흐림 효과 색상 및 불투명도 조절 */
+            display: none; /* 초기에는 보이지 않도록 설정 */
+        }
+
+</style>
+

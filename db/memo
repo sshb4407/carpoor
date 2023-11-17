@@ -1,0 +1,11 @@
+
+// 로그인 로그아웃 html 작업시 사용
+<a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/member/sign}">로그인</a>
+<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</
+
+
+// 로그아웃 구현 시 SecurityConfig 에 추가
+ .logout((logout) -> logout
+                .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout")) // 로그아웃 시행 url
+                .logoutSuccessUrl("/") // 성공 시 이동 url
+                .invalidateHttpSession(true)) // 로그아웃 시 세션 삭제

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ko"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta http-equiv="cache-control" content="no-store, must-revalidate">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>fullpage 연습</title>
+
+    <link rel="stylesheet" href="fullpage.css" />
+    <!-- 제이쿼리 불러오기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.5/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="/js/money.js" defer></script>
+
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css"/>
+
+    <script src="/js/money.js" defer></script>
+
+    <link
+            type="text/css"
+            media="screen"
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
+    />
+</head>
+<div class="top-bar-test">
+    <div class="navbar bg-base-100 w-[1920px] h-[100px] flex justify-between px-32 bg-white text-black font-bold ">
+        <div class="navbar-start">
+            <a href="#" class="h-[100px] "
+            ><img
+                    src="https://i.postimg.cc/ydv1Q2Wt/car-poor-logo-img-black.png"
+                    alt=""
+                    class="w-full h-full"
+            /></a>
+        </div>
+        <div class="navbar-center hidden lg:flex ">
+            <ul class="menu menu-horizontal px-1 text-xl">
+                <li><a>모델</a></li>
+                <li><a>이벤트</a></li>
+                <li><a>디지털/고객지원</a></li>
+                <li><a>브랜드</a></li>
+            </ul>
+
+        </div>
+        <div class="navbar-end">
+            <ul class="menu menu-horizontal px-1">
+                <li>
+                    <details>
+                        <summary class="w-[80px]">
+                            <img src="https://i.postimg.cc/1RHr5RT4/free-icon-user.png" class="w-full h-full"  alt="">
+                        </summary>
+                        <ul class="p-2 bg-base-100">
+                            <li class="w-[120px]"><a class="nav-link text-base" sec:authorize="isAnonymous()" th:href="@{/member/sign}">로그인</a>
+                                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a></li>
+                            <li class="w-[120px]">
+                                <a class="nav-link text-base" sec:authorize="isAuthenticated()" th:href="@{/member/showMemberInfo}">my page</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+
+
+        </div>
+
+    </div>
+</div>
+<body class="overflow-x-hidden">
+<form action="/car/doDelete" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+<div class="top-bar-section">
+    <div class="top-bar-container">
+
+
+    </div>
+
+</div>
+
+<div class="main-section  ">
+    <div class="main-box1">
+        <div class="select-btn-section bg-indigo-500" style="display:none;">
+            <div class="m-5">정말 삭제 하시겠습니까?</div>
+            <div class="select-btn-container">
+                <div>
+                    <button class="select-yes-btn btn-submit ring-offset-2 ring-2" type="submit" >확인</button>
+                </div>
+                <div>
+                    <button class="select-no-btn ring-offset-2 ring-2">취소</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div  style=" margin-right:20px; "><button   type="submit" class = "delButton checkbox-xs btn-check">삭제</button></div>
+    </div>
+    <div class="main-box2">
+       <div class="main-box2-title "  data-theme="light">
+           <div  class="main-box2-title-item1" style="">모델</div>
+           <div class="main-box2-title-item2" style="">견적 금액</div>
+           <div class="main-box2-title-item3" style="">견적일</div>
+           <div class="main-box2-title-item4" style=""><div><span>전체 선택</span></div><div><input class="allCheckBox" type="checkBox"></div>  </div>
+       </div>
+
+<!--삭제 폼 넣기-->
+
+<!--      견적 db 들어갈 공간 -->
+        <div   style="" class="main-box2-body">
+            <div style="text-align:center ;   margin:100px 0;" th:if="${selectOption == null}" >
+                <!-- Add your additional tag or element here when selectOption is empty -->
+                <div style="font-size:30px; ">등록된 차가 없습니다.</div>
+            </div>
+            <div class="main-box2-body-container"  th:if="${selectOption != null}" th:each="selectOption, s : ${selectOption}">
+
+                <div class="main-box2-body-container-item1">
+
+                    <a th:href="@{|/car/myPageDetail/${selectOption.id}|}">
+                        <div><img class="option-car" src="" th:src="${selectOption.outImgUrl}"></div>
+                    </a>
+                </div>
+                <div class="main-box2-body-container-item2   myPage-price1"  ></div>
+                <div class="main-box2-body-container-item2 myPage-price2" style="display:none;"  th:text="${selectOption.wholePrice}" ></div>
+                <div class="main-box2-body-container-item3" th:text="${selectOption.createDate}" ></div>
+                <div class="main-box2-body-container-item4" >
+                    <input class="main-box2-body-container-checkbox checkbox-xs" name="id" th:value="${selectOption.id}" type="checkbox">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="main-box3">
+        <div class="text-item">
+            <div><h2>안내 사항</h2></div>
+            <br>
+            <div><span>견적서는 최대 3개월 까지 보관됩니다.</span></div>
+            <div> <span>견적서 비교는 승용 차종만 최대 4대 까지 비교 할 수 있습니다.</span></div>
+
+
+        </div>
+
+    </div>
+</div>
+</form>
+
+<footer class=" footer footer-center p-10 text-base-content rounded mt-24">
+    <nav class="grid grid-flow-col gap-4 text-base font-bold">
+        <a class="link link-hover">About us</a>
+        <a class="link link-hover">Contact</a>
+        <a class="link link-hover">Jobs</a>
+        <a class="link link-hover">Press kit</a>
+    </nav>
+    <nav class="text-xs">
+        <div class="grid grid-flow-col gap-4">
+            <p>(주)영규 | BIRTHDAY 1997-03-17 [happy birth day] | OWNER 영규 | 대전광역시 대덕구 중리동</p>
+        </div>
+        <div class="grid grid-flow-col gap-4">
+            <p>TEL 010-2282-3232 | EMAIL alsdudrb123@gmail.com | ONLINE PERMIT TO 대전 대덕구 | 영규(주)</p>
+        </div>
+    </nav>
+    <aside>
+        <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+    </aside>
+</footer>
+
+</body>
+
+<script>
+
+    function viewBtn() {
+        $(".select-btn-section").css("display", "block");
+    }
+
+
+    function closeBtn() {
+        $(".select-btn-section").css("display", "none");
+    }
+
+
+       $(".btn-check").click(function() {
+         viewBtn();
+         event.preventDefault();
+
+
+    });
+
+    $(".select-no-btn").click(function() {
+        closeBtn();
+          event.preventDefault();
+    });
+
+    var mainContainerCheckboxes = $(".main-box2-body-container-checkbox");
+
+
+
+     mainContainerCheckboxes.click(function() {
+        // Check if all mainContainerCheckboxes are selected
+        var allSelected = true;
+        mainContainerCheckboxes.each(function() {
+            if (!$(this).prop("checked")) {
+                allSelected = false;
+                return false; // Exit the loop early if any checkbox is not selected
+            }
+        });
+
+        // Update the "모두 선택" checkbox based on the result
+        allCheckBox.prop("checked", allSelected);
+    });
+
+
+</script>
+
+<style>
+    body {
+      font-family: 'Nanum Gothic'
+    }
+
+
+        .top-bar-section {
+
+     width : 100%;
+     height :100px;
+    }
+
+    .top-bar-container {
+         width:1680px;
+         height:100px;
+         margin-left:auto;
+         margin-right:auto;
+    }
+
+        .main-section {
+        width:1040px;
+        margin-left:auto;
+         margin-right:auto;
+         height: auto;
+
+
+        }
+
+        .main-section > div{
+        margin: 50px 0 ;
+
+        }
+
+        .main-box1 {
+     justify-content: space-between;
+         height: 50px;
+        display:flex;
+        font-size:20px;
+
+        }
+        .main-box1 {
+        line-height:43px;
+
+        }
+        .allCheckBox {
+
+
+        }
+
+
+        .delButton{
+
+            width:200px;
+            height: 50px;
+            background-color:gray;
+            color:white;
+
+        }
+
+
+
+        .main-box2 {
+        border-top:1px solid gray;
+        border-bottom:1px solid gray;
+
+         max-height: 1400px;
+        color:#515250;
+
+
+        }
+
+        .main-box2-title{
+                width: 100%;
+                display:flex;
+                justify-content : space-around;
+                background-color:#e0e0dc;
+                font-size:20px;
+                text-align:center;
+
+        }
+
+
+
+        .main-box2-title-item1 {
+        width:220px;
+        margin-left:-20px;
+        line-height:60px;
+        }
+
+        .main-box2-title-item2 {
+        width:250px;
+               line-height:60px;
+        }
+
+
+        .main-box2-title-item3 {
+        width:250px;
+           line-height:60px;
+
+        }
+
+
+        .main-box2-title-item4 {
+
+
+        flex-wrap:wrap;
+        justify-content:center;
+        font-size:20px;
+        }
+
+        .main-box2-body-container{
+        display :flex;
+
+           text-align:center;
+            font-size:10px;
+
+            max-height:1500px;
+            line-height:170px;
+            border-bottom:1px solid gray;
+            height:150px;
+
+
+
+        }
+
+          .option-car{
+                width:400px;
+                height:160px;
+
+        }
+
+        .main-box2-body-container-item1 {
+            width:370px;
+          flex-basis=0;
+          margin-left:40px;
+          height:50px;
+        }
+
+        .main-box2-body-container-item2 {
+            font-size:20px;
+            width:300px;
+          flex-basis=0;
+          margin-left:60px;
+
+        }
+
+        .main-box2-body-container-item3 {
+             font-size:20px;
+          flex-basis=0;
+          width:300px;
+          margin-left:120px;
+        }
+
+        .main-box2-body-container-item4 {
+            margin-left:142px;
+            margin-right:60px;
+          flex-basis=0;
+        }
+
+    .main-box3 {
+
+         height: 300px;
+         background-color:#e0e0dc;
+        }
+
+
+     .text-item {
+        padding-top:50px;
+        margin-left:50px;
+        font-size:25px;
+        }
+
+    .select-btn-section {
+                display:none;
+                position:absolute;
+                top:50%;
+                left:50%;
+                transform:translate(-50%,-50%);
+                width:350px;
+                height:150px;
+               color:white;
+                font-size:20px;
+
+
+            }
+
+
+
+ .select-btn-container {
+                display:flex;
+                margin-top:20px;
+                 justify-content: space-around;
+
+                     border-radius: 5px;
+
+            }
+
+
+
+
+
+
+
+
+
+</style>
+
+<script>
+    var allCheckBox = $(".allCheckBox");
+
+
+    allCheckBox.click(function(){
+    if (allCheckBox.prop("checked")) {
+       console.log("체크박스 체크 상태");
+           $(".main-box2-body-container-checkbox").prop("checked",true);
+
+
+    }
+    else {
+    console.log("체크박스 해제 상태 ");
+    $(".main-box2-body-container-checkbox").prop("checked",false);
+    }
+});
+
+</script>

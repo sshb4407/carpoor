@@ -1,0 +1,62 @@
+
+
+    html {
+             scroll-behavior: smooth;
+            }
+            a, body {
+            text-decoration:none;
+            color :inherit;
+            margin:0;
+            padding:0;
+            overflow-y: hidden;
+             overflow: auto
+              touch-action: auto;
+               position:relative;
+
+            }
+            #fullpage {
+
+            }
+                /*  페이지 개발 도구 창에만 이런게 있어서 페이지가 짤려서 뭐지 하고 얘만 따로 추가함   */
+
+
+
+            .top-bar-test {
+                position:fixed;
+
+               z-index:2;
+
+
+            }
+
+            #fullpage > .section {
+              display: block;
+                height:930px;
+            scroll-behavior: smooth;
+
+            }
+
+            .section-2 {
+
+
+            }
+            .fp-scrollable {
+              overflow: hidden;
+              position: relative;
+            }
+
+            .scrollable-container {
+              height: 100%;
+              overflow-y: scroll;
+              position: relative;
+            }
+
+  /* Set the tooltip color for section 2 to black */
+  #fp-nav ul li[data-tooltip="section2"] a span {
+    color: black !important;
+  }
+
+  /* Set the tooltip color for section 3 to black */
+  #fp-nav ul li[data-tooltip="section3"] a span {
+    color: black !important;
+  }

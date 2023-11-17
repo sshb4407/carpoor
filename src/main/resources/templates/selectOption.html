@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ko"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!--    뒤록가 ㅣ기 페이지 캐싱 비활성화-->
+    <meta http-equiv="cache-control" content="no-store, must-revalidate">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>fullpage 연습</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="fullpage.css" />
+    <!-- 제이쿼리 불러오기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css"/>
+
+
+    <link href="/dist/output.css" rel="stylesheet">
+    <!-- 풀페이지 불러오기 -->
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.19/fullpage.css"
+    />
+<!--    섹션 1,2,3  css 와 js  -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/all.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/section1.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/section2.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/section3.css}"/>
+    <script src="/js/all.js" defer></script>
+
+    <script src="/js/section2.js" defer></script>
+    <script src="/js/section3.js" defer></script>
+<!--숫자 자동으로 , 붙이게 하는 js -->
+    <script src="/js/money.js" defer></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.19/fullpage.min.js"></script>
+
+</head>
+<form id="section3-form" th:action="@{/car/color}"  method="post">
+
+<body>
+
+<!--    탑바 시작-->
+    <div class="top-bar-test">
+        <div class="navbar bg-base-100 w-[1920px] h-[100px] flex justify-between px-32 bg-white text-black font-bold ">
+            <div class="navbar-start">
+                <a href="#" class="h-[100px] "
+                ><img
+                        src="https://i.postimg.cc/ydv1Q2Wt/car-poor-logo-img-black.png"
+                        alt=""
+                        class="w-full h-full"
+                /></a>
+            </div>
+            <div class="navbar-center hidden lg:flex ">
+                <ul class="menu menu-horizontal px-1 text-xl">
+                    <li><a>모델</a></li>
+                    <li><a>이벤트</a></li>
+                    <li><a>디지털/고객지원</a></li>
+                    <li><a>브랜드</a></li>
+                </ul>
+
+            </div>
+            <div class="navbar-end">
+                <ul class="menu menu-horizontal px-1">
+                    <li>
+                        <details>
+                            <summary class="w-[80px]">
+                                <img src="https://i.postimg.cc/1RHr5RT4/free-icon-user.png" class="w-full h-full"  alt="">
+                            </summary>
+                            <ul class="p-2 bg-base-100">
+                                <li class="w-[120px]"><a class="nav-link text-base" sec:authorize="isAnonymous()" th:href="@{/member/sign}">로그인</a>
+                                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a></li>
+                                <li class="w-[120px]">
+                                    <a class="nav-link text-base" sec:authorize="isAuthenticated()" th:href="@{/member/sign}">my page</a></li>
+                            </ul>
+                        </details>
+                    </li>
+                </ul>
+
+
+            </div>
+
+        </div>
+    </div>
+
+<!--    탑바 끝   -->
+    <div id="fullpage">
+
+        <!-- 1 -->
+    <div  class="section section-1">
+        <div class="bg-color">
+        <a href="#section2"
+        ></a>
+
+        <div class="section1-text-container">
+            <div style="font-size:60px;">Design</div>
+            <br>
+            <div>미래 지향적인 디테일에 견고한 디자인을 더해</div>
+            <div>싼타페만의 압도적인 존재감을 전달합니다.</div>
+            
+        </div>
+
+        </div>
+        
+    </div>
+    <!-- fp-auto-height 화면높이만큼 다음페이지 살짝나옴 -->
+    <!-- 2 -->
+
+    <div class="section section-2 ">
+
+
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+
+            <!-- 변경된 부분: "Colors"는 x축을 배경 이미지의 왼쪽 끝으로, 버튼들은 x축을 배경 이미지의 오른쪽 끝으로 보내줌 -->
+            <div id="headBlock"  style="display: flex; align-items: center; width: 1600px;">
+                <h1 style="margin-right: auto; margin-bottom: 0; margin-left: 0; font-size: 60px;">Colors</h1>
+                <div class="button-container" style="display: flex; margin-left: auto; align-items: center; margin-right: 0;">
+                    <button id="externalButton" type="button" style="margin-right: 10px;" onclick="selectButton(this)">외부 색상</button>
+                    <button id="internalButton"  type="button"  onclick="selectButton(this)">내부 색상</button>
+                </div>
+            </div>
+
+            <div id="content1" >
+                <div class="bgImg">
+                    <!--            서버에 outImgUrl 보내주기 위한 장치      -->
+                    <input class="dbGoOutImg" type="text" style="display:none;" name="outImgUrl" value="https://www.hyundai.com/contents/vr360/MX03/exterior/WW2/001.png">
+                    <img class="carImg cc" src="https://www.hyundai.com/contents/vr360/MX03/exterior/WW2/001.png" alt="">
+                </div>
+
+                <div class="colorListContainer" style="margin-top: 10px; overflow: hidden;" >
+                    <div class="colorList">
+                        <div class="colorDiv dd" th:each="carDetail, iterStat  : ${carDetails}" onclick="doClick(this)" th:data-img-url="${carDetail.imgUrl}">
+                            <div class="colorItem"
+                                 th:data-img-url="${carDetail.imgUrl}"
+                                 th:style="'background-image: url(\'' + ${carDetail.btnUrl} + '\')'">
+                                <input class="colorCheckbox"  type="checkbox" name="outColorId" th:value="${carDetail.id}" style="display: none;" >
+                            </div>
+                            <div class="colorItem2" th:text="${carDetail.name}" style="text-align: center;"  ></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="content2" >
+                <div class="bgImg">
+                    <!--                   inImgUrl를 보내주기 위해있는 장치-->
+                    <input class="dbGoInImg" type="text" style="display:none;" name="inImgUrl" value="https://www.hyundai.com/contents/vr360/MX03/interior/3NB/img-interior.png">
+
+                    <img class="carImg ccc" src="https://www.hyundai.com/contents/vr360/MX03/interior/3NB/img-interior.png" alt="">
+                </div>
+
+                <div class="colorListContainer" style="margin-top: 10px; overflow: hidden;" >
+                    <div class="colorList">
+                        <div class="colorDiv ddd" th:each="carDetail2, iterStat  : ${carDetails2}" onclick="doClick2(this)" th:data-img-url="${carDetail2.imgUrl}">
+                            <div class="colorItem3"
+                                 th:data-img-url="${carDetail2.imgUrl}"
+                                 th:style="'background-image: url(\'' + ${carDetail2.btnUrl} + '\')'">
+                                <input class="colorCheckbox"  type="checkbox" name="inColorId" th:value="${carDetail2.id}"  style="display: none; " >
+
+                            </div>
+                            <div class="colorItem2" th:text="${carDetail2.name}" style="text-align: center;"  ></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <input type="hidden" value="35460000" name="wholePrice" />
+        </div>
+
+    </div>
+
+    <!-- 3 -->
+    <div class="section section-3 fp-scrollable">
+
+
+
+
+
+        <div class="option-section">
+            <!--          이미지 넣을 공간-->
+            <div class="img-section">
+
+                <div class="img-container">
+
+                    <div><h2 style="font-size:60px; margin-top:20px; margin-bottom:10px;">디 올 뉴 싼타페 - 프레스티지</h2></div>
+                    <div class="price-text" style="font-size : 40px; "> <span style="font-size:20px;     font-weight: bold;">총 차량 가격 </span> <span id="money" style="font-size:50px;    font-weight: bold;">35460000</span><span class="option-price" id="money2" style="display:none;" >35460000</span> <span style="font-size:50px;    font-weight: bold;">원</span>  </div>
+
+                    <img class="img-item1" src="https://www.hyundai.com/contents/spec/MX5/phone.jpg" alt="">
+
+                    <div class="information-box">
+                        <span class="information-text">스마트폰 2대를 별도의 케이블 없이 고속 충전할 수 있는 듀얼 무선 충전 시스템이 적용되어 사용성을 높였습니다.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!--           옵션 선택 넣을 공간-->
+            <div class="select-section">
+
+
+                <div class="option-container">
+                    <h2  style="margin-bottom:20px; margin-left:40px">옵션</h2>
+                    <div class="scrollable-container">
+
+                        <div class="option-box" >
+                            <div  id="box" class="option-item"  th:each="carOption : ${carOption}" th:id="${carOption.id}">
+                                <a >
+                                    <img class="option-box-img" th:src="${carOption.imgUrl}" th:alt="${carOption.name}" th:data-img-url="${carOption.imgUrl}"  th:information-text="${carOption.information}">
+                                </a>
+                                <div  class="check"  type="optionId" th:optionId="${carOption.id}" onclick="doCheck(this)"  th:value="${carOption.price}+이용균입니다." >
+                                    <a href="#" >
+                                        <input class="checkbox" type="checkbox" th:name="optionId" th:value="${carOption.id}" >
+                                        <div th:text="${carOption.name}"></div>
+                                        <div class="price2" style="display:inline-block; " th:text="${carOption.price}+원"><span>원</span></div><span>원</span>
+
+                                        <div class="price" style="display:none;" th:text="${carOption.price}"></div>
+                                        <br>
+                                        <!--                                        <input class="radio" type="radio"  >-->
+                                    </a>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <button class="btn-check bg-indigo-500  " style="margin-top:20px;"  >차 등록</button>
+
+        <div class="select-btn-section bg-indigo-500">
+            <div class="m-5">이 옵션 대로 차 견적서를 등록하시겠습니까?</div>
+            <div class="select-btn-container">
+                <div>
+                    <button class="select-yes-btn btn-submit ring-offset-2 ring-2" type="submit" value="" name="wholePrice">확인</button>
+                </div>
+                <div>
+                    <button class="select-no-btn ring-offset-2 ring-2">취소</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="display:none;" class="select-btn-section2">
+            <div>견적서가 등록되었습니다. 마이페이지를 가시겠습니까?</div>
+            <div class="select-btn-container2">
+                <div>
+                    <button class="select-yes-btn2 btn-submit" type="submit" value="" name="wholePrice">확인</button>
+                </div>
+                <div>
+                    <button class="select-no-btn2">취소</button>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class=" footer footer-center p-10 text-base-content rounded mt-24">
+            <nav class="grid grid-flow-col gap-4 text-base font-bold">
+                <a class="link link-hover">About us</a>
+                <a class="link link-hover">Contact</a>
+                <a class="link link-hover">Jobs</a>
+                <a class="link link-hover">Press kit</a>
+            </nav>
+            <nav class="text-xs">
+                <div class="grid grid-flow-col gap-4">
+                    <p>(주)영규 | BIRTHDAY 1997-03-17 [happy birth day] | OWNER 영규 | 대전광역시 대덕구 중리동</p>
+                </div>
+                <div class="grid grid-flow-col gap-4">
+                    <p>TEL 010-2282-3232 | EMAIL alsdudrb123@gmail.com | ONLINE PERMIT TO 대전 대덕구 | 영규(주)</p>
+                </div>
+            </nav>
+            <aside>
+                <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+            </aside>
+        </footer>
+
+
+
+        <div style="width:100px; height;50px;"></div>
+
+    </div>
+
+
+<!-- 4 -->
+
+
+
+
+    </div>
+
+</body>
+
+<input type="hidden" value="" name="wholePrice" />
+</form>
+
+</html>
+
+<style>
+
+    /*
+[id 선택자]
+- 동일한 이름 사용 불가능
+- 한 곳에만 적용
+- css표시 : #이름
+[class 선택자]
+- 동일한 이름 사용 가능
+- 동일한 여러 곳에 적용해서 사용
+- css표시 : .이름
+*/
+#fullpage > .section {
+display: block;
+}
+
+
+</style>
+
+<style>
+
+    @font-face {
+        font-family: 'LeferiPoint-BlackA';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackA.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    html, body{
+    font-family: 'LeferiPoint-BlackA';
+    font-weight: 200;
+    }
+
+    .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* 흐림 효과 색상 및 불투명도 조절 */
+            display: none; /* 초기에는 보이지 않도록 설정 */
+        }
+
+</style>
+
+

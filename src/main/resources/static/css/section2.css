@@ -1,0 +1,125 @@
+.section-2{
+  background-color:rgba(5,5,5,0.5);
+}
+
+  .button-container {
+                  display: flex;
+                  align-items: center;
+                  margin-left: auto;
+                  margin-right: 8%;
+                  margin-top:50px;
+                }
+
+                .button-container button {
+                  padding: 10px 20px;
+                  font-size: 14px;
+                  border: none;
+                  border-radius: 5px;
+                  background-color: #3498db;
+                  color: white;
+                  cursor: pointer;
+                }
+
+                .button-container button.selected {
+                  background-color: #e74c3c;
+                }
+
+                .border-highlight {
+                        border: 2px ;
+                        padding: 0 10px; /* 내부 여백 추가 */
+                        border-radius: 5px; /* 둥근 모서리 */
+                        background-color: rgba(173, 216, 230, 0);
+                        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+                        transition: transform 0.3s ease, background-color 0.3s ease; /* 부드러운 변화 효과 */
+                    }
+
+               .colorItem2 {
+                        font-weight: bold;
+               }
+
+                #content2 > .bgImg {
+
+                   width: 1600px;
+                   height: 550px;
+                   display: flex;
+                   justify-content: center;
+                   align-items: center;
+                }
+
+                #content2 .carImg {
+
+                   width: 1500px;
+                   height: 550px;
+                   display: flex;
+                   justify-content: center;
+                   align-items: center;
+
+                }
+
+
+               #content1 > .bgImg {
+                   background-image: url('https://www.hyundai.com/static/images/model/santafe/23fc/the_all_new_santafe_colors_exterior_bg.jpg');
+                   width: 1600px;
+                   height: 550px;
+                   display: flex;
+                   justify-content: center;
+                   align-items: center;
+                   background-repeat: no-repeat; /* 이미지 반복 x */
+                    background-size: cover; /* 남는 공간 이미지를 채워줌,찌그러짐 x */
+                    background-position: center;
+               }
+
+               .colorListContainer {
+                   width: 1600px;
+                   overflow: hidden;
+               }
+
+               .colorList {
+                   display: flex;
+                   margin-top: 0;
+                   margin-bottom: 20px; /* 스크롤바와의 간격 조절 */
+                   width: max-content;
+               }
+
+               .colorList > .colorDiv{
+
+                   width: 190px;
+                   height: 110px;
+                   margin: 0 2px;
+                   cursor: pointer;
+                   display: flex;
+                   flex-wrap :wrap;
+                   justify-content: center;
+                   align-items: center;
+                   <!--        background-image : url('https://www.hyundai.com/contents/vr360/MX03/exterior/YBM/colorchip-exterior.png');-->
+               }
+
+                 .colorDiv > div {
+                    width :100%;
+                 }
+
+                 .colorItem {
+                 width :190px;
+                 height:90px;
+                 margin:10px;
+                 }
+
+                 .colorItem3 {
+                 width :190px;
+                 height:90px;
+                 margin:10px;
+                 }
+
+                /* 커스텀 스크롤 스타일링 */
+                   .colorListContainer::-webkit-scrollbar {
+                       width: 10px;
+                   }
+
+                   .colorListContainer::-webkit-scrollbar-thumb {
+                       background-color: rgba(0, 0, 0, 0.3);
+                       border-radius: 5px;
+                   }
+
+                   .colorListContainer::-webkit-scrollbar-thumb:hover {
+                       background-color: rgba(0, 0, 0, 0.5);
+                   }

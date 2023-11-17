@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <title>Title</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<header>
+    <div class="navbar bg-base-100 w-[1920px] h-[100px] flex justify-between px-32 bg-white text-black font-bold ">
+        <div class="navbar-start">
+            <a href="#" class="h-[100px] "
+            ><img
+                    src="https://i.postimg.cc/ydv1Q2Wt/car-poor-logo-img-black.png"
+                    alt=""
+                    class="w-full h-full"
+            /></a>
+        </div>
+        <div class="navbar-center hidden lg:flex ">
+            <ul class="menu menu-horizontal px-1 text-xl">
+                <li><a>모델</a></li>
+                <li><a>이벤트</a></li>
+                <li><a>디지털/고객지원</a></li>
+                <li><a>브랜드</a></li>
+            </ul>
+
+        </div>
+        <div class="navbar-end">
+            <ul class="menu menu-horizontal px-1">
+                <li>
+                    <details>
+                        <summary class="w-[80px]">
+                            <img src="https://i.postimg.cc/1RHr5RT4/free-icon-user.png" class="w-full h-full"  alt="">
+                        </summary>
+                        <ul class="p-2 bg-base-100">
+                            <li class="w-[120px]"><a class="nav-link text-base" sec:authorize="isAnonymous()" th:href="@{/member/sign}">로그인</a>
+                                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a></li>
+                            <li class="w-[120px]">
+                                <a class="nav-link text-base" sec:authorize="isAuthenticated()" th:href="@{/member/sign}">my page</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+
+
+        </div>
+
+    </div>
+</header>
+<body class="flex flex-col justify-center  items-center">
+
+<div class="middle6 card bg-gray-100 text-black text-xl pt-5 w-[80%] h-[80vh]">
+
+    <form th:action="@{/question/delete}" method="post" class="overflow-x-auto question-list-vue-app">
+        <table class="table">
+            <!-- head -->
+            <thead>
+            <tr>
+                <th class=" w-12"></th>
+                <th class=" text-start w-auto">제목</th>
+                <th class=" text-center w-28">답변 상태</th>
+                <th class=" text-center w-36">질문자</th>
+                <th class=" text-center w-12"></th>
+            </tr>
+            </thead>
+            <tbody class="overflow-y-auto">
+
+            <tr th:each="question, stat : ${questions}">
+                <th th:text="${stat.index + 1}"></th>
+                <td class="hover:underline">
+                    <a th:href="@{'/question/detail/' + ${question.id}}" th:text="${question.subject}"></a>
+                </td>
+                <td class="text-center" th:text="${question.answerStatus}"></td>
+                <td class="text-center" th:text="${question.author.name}"></td>
+                <td>
+                    <input type="checkbox" name="questionIds" th:value="${question.id}">
+                </td>
+            </tr>
+
+            <div class="flex justify-end mr-12">
+                <button type="submit" class="btn btn-outline">삭제</button>
+            </div>
+
+            </tbody>
+        </table>
+    </form>
+</div>
+
+
+</body>

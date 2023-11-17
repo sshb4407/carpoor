@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>옵션페이지</title>
+    <link rel="stylesheet" href="css/style-option.css" />
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/code.jquery.com_jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+
+<style>
+
+    .video-container {
+  position:relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1; /* Place the video behind other content /
+  margin-bottom:100px;
+}
+
+.video-container video {
+  object-fit: cover;
+  width: 100%;
+  height: 1000px;
+  pointer-events: none; / Prevent interactions with the video */
+
+}
+
+
+.video-text {
+        position:absolute;
+        bottom:2%;
+        left:50%;
+
+        z-index:3;
+        font-size:30px;
+        font-weight:bold;
+        transform: translatex(-50%);
+        color:white;
+        text-align:center;
+}
+
+    .video-text > div {
+    margin: 0 20px;
+
+    }
+
+    .video-text-power {
+        border-left:1px solid white;
+        border-right:1px solid white;
+        padding:0 30px;
+    }
+
+
+</style>
+
+<div class="navbar w-[1920px] h-[80px] flex justify-between px-32 text-white bg-black font-bold fixed z-10 opacity-90">
+    <div class="navbar-start">
+        <a href="#" class="h-[100px] "
+        ><img
+                src="https://media.discordapp.net/attachments/1146607555666259972/1153903097828081674/car-poor-logo-img-black.png"
+                alt=""
+                class="w-full h-full"
+        /></a>
+    </div>
+    <div class="navbar-center hidden lg:flex ">
+        <ul class="menu menu-horizontal px-1 text-xl">
+            <li><a>모델</a></li>
+            <li><a>이벤트</a></li>
+            <li><a>디지털/고객지원</a></li>
+            <li><a>브랜드</a></li>
+            <li><a href="/car/color">내 차 만들기</a></li>
+        </ul>
+
+    </div>
+    <div class="navbar-end">
+        <ul class="menu menu-horizontal px-1">
+            <li>
+                <details>
+                    <summary class="">
+                        <i class="fa-regular fa-circle-user fa-2xl"></i>
+                    </summary>
+                    <ul class="p-2 bg-base-100 text-black">
+                        <li class="w-[120px]"><a class="nav-link text-base" sec:authorize="isAnonymous()" th:href="@{/member/sign}">로그인</a>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a></li>
+                        <li class="w-[120px]">
+                            <a class="nav-link text-base" sec:authorize="isAuthenticated()" th:href="@{/member/sign}">my page</a></li>
+                    </ul>
+                </details>
+            </li>
+        </ul>
+
+
+    </div>
+
+</div>
+
+<body class="overflow-x-hidden flex flex-col">
+<div class="w-screen h-screen border-2">
+    <div class="video-container">
+        <video autoplay loop muted playsinline>
+            <source src="/video.mp4" id="video1" type="video/mp4">
+            <!-- Add more source elements for different video formats if needed -->
+
+        </video>
+
+    </div>
+    <div class="video-text  flex mb-14">
+        <div class="video-text-price ">
+            <div class="text-xs">가격</div>
+            <div>3,546만원~</div>
+        </div>
+        <div class="video-text-power  ">
+            <div class="text-xs">연비</div>
+            <div>~11.0km/l</div>
+        </div>
+        <div class="video-text-engine ">
+            <div class="text-xs">배기량</div>
+            <div>~2,497cc</div>
+        </div>
+    </div>
+</div>
+
+<div class="justify-center relative box2">
+    <!-- flex-container -->
+    <!-- **(닫기)옵션-1번** -->
+    <div class="content content-1">
+        <!-- flex-item -->
+        <div class="option-box option-box-1">
+            <img src="https://i.postimg.cc/7YTqKBPM/1.jpg" alt="파노라믹 디스플레이" />
+            <div class="text option-text">
+                <ul>
+                    <h1>
+                        <li class="tit">파노라믹커브드디스플레이</li>
+                    </h1>
+                    <li>
+                        12.3인치의 디지털 클러스터와 12.3인치의 인포테인먼트 시스템으로
+                        구성된 디스플레이를 곡선의 형태로 연결
+                    </li>
+                    <li>고급감을 높이고 와이드하고 하이테크한 이미지를 전달합니다.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="outer">
+            <div class="inner">
+                <label>Back</label>
+            </div>
+        </div>
+    </div>
+    <!-- **(열기)옵션-1번** -->
+    <section class="open-box">
+        <div class="container container-1">
+            <a class="btn open-btn open-btn-1">
+                <p>+</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- **(닫기)옵션-2번** -->
+    <div class="content content-2">
+        <!-- flex-item -->
+        <div class="option-box option-box-2">
+            <img src="https://i.postimg.cc/XJJbdLD5/2-2.jpg" alt="빌트인캠2" />
+            <div class="text option-text">
+                <ul>
+                    <h1>
+                        <li class="tit">빌트인캠2</li>
+                    </h1>
+                    <li>
+                        고해상도 전용 전,후방 카메라로 주/야간 화질이 우수하며 음성 녹음,
+                        대용량 외장 메모리
+                        <br />OTA 기능, 차량 주행 정보 저장 및 재생 기능(지도 연동 등)이
+                        적용되었습니다.
+                    </li>
+                    <li>
+                        블루링크를 통해 주차 중 충격 감지 저장 영상 전송 및 빌트인 캠 상태
+                        정보도 제공합니다.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="outer">
+            <div class="inner">
+                <label>Back</label>
+            </div>
+        </div>
+    </div>
+    <!-- **(열기)옵션-2번** -->
+    <section class="open-box">
+        <div class="container container-2">
+            <a class="btn open-btn open-btn-2">
+                <p>+</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- **(닫기)옵션-3번** -->
+    <div class="content content-3">
+        <!-- flex-item -->
+        <div class="option-box">
+            <img src="https://i.postimg.cc/y8HWcqhS/3.jpg" alt="무선충전" />
+            <div class="text option-text">
+                <ul>
+                    <h1>
+                        <li class="tit">듀얼무선충전디지털키2</li>
+                    </h1>
+                    <li>
+                        스마트폰 2대를 별도의 케이블 없이 고속 충전할 수 있는 듀얼 무선
+                        충전 시스템이 적용되어 <br />사용성을 높였습니다.
+                    </li>
+                    <li>
+                        아이폰, 애플워치 및 안드로이드 계열 스마트폰으로 도어 잠금/해제 및
+                        시동이 가능하고 최대 15개 디바이스까지 사용 권한을 공유할 수
+                        있습니다.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="outer">
+            <div class="inner">
+                <label>Back</label>
+            </div>
+        </div>
+    </div>
+    <!-- **(열기)옵션-3번** -->
+    <section class="open-box">
+        <div class="container container-3">
+            <a class="btn open-btn open-btn-3">
+                <p>+</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- **(닫기)옵션-4번** -->
+    <div class="content content-4">
+        <!-- flex-item -->
+        <div class="option-box">
+            <img src="https://i.postimg.cc/d3CtZnLB/4.jpg" alt="하이패스" />
+            <div class="text option-text">
+                <ul>
+                    <h1>
+                        <li class="tit">하이패스</li>
+                    </h1>
+                    <li>유료 도로로 진출입시 통행료가 자동결제 되는 장치입니다.</li>
+                    <li>하이패스 시스템은 시동이 걸려있는 상태에서만 작동합니다.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="outer">
+            <div class="inner">
+                <label>Back</label>
+            </div>
+        </div>
+    </div>
+    <!-- **(열기)옵션-4번** -->
+    <section class="open-box">
+        <div class="container container-4">
+            <a class="btn open-btn open-btn-4">
+                <p>+</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- **(닫기)옵션-5번** -->
+    <div class="content content-5">
+        <!-- flex-item -->
+        <div class="option-box">
+            <img src="https://i.postimg.cc/T302bKYZ/5-bose.jpg" alt="BOSE 프리미엄 사운드" />
+            <div class="text option-text">
+                <ul>
+                    <h1>
+                        <li class="tit">BOSE 프리미엄 사운드</li>
+                    </h1>
+                    <li>
+                        12스피커와 외장앰프로 구성된 BOSE 프리미엄 사운드 시스템으로
+                        저음질 보상 및 서라운드 효과를 통해 풍부한 음향과 사운드 몰입을
+                        제공합니다.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="outer">
+            <div class="inner">
+                <label>Back</label>
+            </div>
+        </div>
+    </div>
+    <!-- **(열기)옵션-5번** -->
+    <section class="open-box">
+        <div class="container container-5">
+            <a class="btn open-btn open-btn-5">
+                <p>+</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- **(닫기)옵션-6번** -->
+    <div class="content content-6">
+        <!-- flex-item -->
+        <div class="option-box">
+            <img src="https://i.postimg.cc/kXd7hQ20/6.jpg" alt="엠비언트 라이트" />
+            <div class="text option-text">
+                <ul>
+                    <h1>
+                        <li class="tit">엠비언트라이트</li>
+                    </h1>
+                    <li>
+                        커브드 디스플레이 하단에 플로팅 타입의 무드 램프를 구성하여 원하는
+                        분위기를 자유롭게 연출할 수 있습니다.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="outer">
+            <div class="inner">
+                <label>Back</label>
+            </div>
+        </div>
+    </div>
+    <!-- **(열기)옵션-4번** -->
+    <section class="open-box">
+        <div class="container container-6">
+            <a class="btn open-btn open-btn-6">
+                <p>+</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- **이미지배경** -->
+    <div class="img-container-box">
+        <div class="background-img">
+            <img src="https://i.postimg.cc/FKwMkvcM/the-all-new-option.jpg" alt="옵션선택배경이미지" />
+        </div>
+    </div>
+</div>
+
+<div>
+
+    <div class="w-screen h-screen pt-[120px] flex flex-row justify-center">
+
+        <div class=" w-1/2 h-full p-5">
+            <div class="w-[200px] h-[60px] font-bold text-[40px] ml-24">
+                제원 정보
+            </div>
+
+            <div class="w-5/6 h-[500px]  mt-12 ml-24">
+
+                <div class="carousel w-full h-full relative">
+                    <div id="slide1" class="carousel-item relative w-full">
+                        <img src="https://www.hyundai.com/contents/repn-car/html/homepage/spec/images/pip-the-all-new-santafe-mx-23fc-specifications-front-w.jpg" class="w-full" />
+                        <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 bg-none">
+                            <a href="#slide3" class="btn btn-circle ">❮</a>
+                            <a href="#slide2" class="btn btn-circle ">❯</a>
+                        </div>
+                    </div>
+                    <div id="slide2" class="carousel-item relative w-full">
+                        <img src="https://www.hyundai.com/contents/repn-car/html/homepage/spec/images/pip-the-all-new-santafe-mx-23fc-specifications-side-w.jpg" class="w-full" />
+                        <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                            <a href="#slide1" class="btn btn-circle ">❮</a>
+                            <a href="#slide3" class="btn btn-circle ">❯</a>
+                        </div>
+                    </div>
+                    <div id="slide3" class="carousel-item relative w-full">
+                        <img src="https://www.hyundai.com/contents/repn-car/html/homepage/spec/images/pip-the-all-new-santafe-mx-23fc-specifications-back-w.jpg" class="w-full" />
+                        <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                            <a href="#slide2" class="btn btn-circle ">❮</a>
+                            <a href="#slide1" class="btn btn-circle ">❯</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="flex justify-center mt-12">
+                <div>
+                    <p class="blt-block notice"> 윤거는 스마트스트림 가솔린 2.5 터보 모델 21인치 타이어 기준</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="w-1/2 h-full p-5">
+
+            <div class="carousel w-full h-full">
+                <div id="slide1-1" class="carousel-item relative w-full">
+
+                    <div class="w-full h-full flex flex-col ">
+                        <div class="flex justify-center mt-5 font-bold text-[30px]">Specification</div>
+                        <div class=" mt-5 w-5/6 mx-auto">
+                            <div class="text-center text-[22px] font-bold bg-indigo-900 text-white">스마트스트림 가솔린 2.5 터보</div>
+                            <div class="text-center text-[22px] flex justify-between items-center text-base border-b-[1px] p-2 ">
+                                <div>전장(mm)</div>
+                                <div>4,830</div>
+                            </div>
+                            <div class="text-center text-[22px] flex justify-between items-center text-base border-b-[1px] p-2 ">
+                                <div>전폭(mm)</div>
+                                <div>1,900</div>
+                            </div>
+                            <div class="text-center text-[22px] flex justify-between items-center text-base border-b-[1px] p-2 ">
+                                <div>전고(mm)</div>
+                                <div>1,720(루프랙 선택 시 1,770) / 1,730(캘리그래피 트림 1,780)</div>
+                            </div>
+                            <div class="text-center text-[22px] flex justify-between items-center text-base border-b-[1px] p-2 ">
+                                <div>축간거리(mm)</div>
+                                <div>2,815</div>
+                            </div>
+                            <div class="text-center text-[22px] flex justify-between items-center text-base border-b-[1px] p-2 ">
+                                <div>윤거 전(mm)</div>
+                                <div>1,646(18) / 1,637(20) / 1,643(21)</div>
+                            </div>
+                            <div class="text-center text-[22px] flex justify-between items-center text-base border-b-[1px] p-2 ">
+                                <div>윤거 후(mm)</div>
+                                <div>1,656(18) / 1,647(20) / 1,653(21)</div>
+                            </div>
+                            <div class="text-center text-[22px] flex justify-between items-center text-base border-b-[1px] p-2 ">
+                                <div>엔진 형식</div>
+                                <div>Smartstream G2.5T-GDi</div>
+                            </div>
+                            <div class="text-center text-[22px] flex justify-between items-center text-base border-b-[1px] p-2 ">
+                                <div>배기량 (cc)</div>
+                                <div>2,497</div>
+                            </div>
+                            <div class="text-center text-[22px] flex justify-between items-center text-base border-b-[1px] p-2 ">
+                                <div>최고출력 (PS/rpm)</div>
+                                <div>281/5,800</div>
+                            </div>
+                            <div class="text-center text-[22px] flex justify-between items-center text-base border-b-[1px] p-2 ">
+                                <div>최대토크 (kgf·m/rpm)</div>
+                                <div>43.0/1,700 ~ 4,000</div>
+                            </div>
+                            <div class="text-center text-[22px] flex justify-between items-center text-base border-b-[1px] p-2 ">
+                                <div>연료탱크용량 (ℓ)</div>
+                                <div>67</div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class=" ml-[500px]">
+                <a href="/car/color">
+                    <button href="/car/color" class="btn btn-outline btn-primary">
+                        내 차 만들기</button>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+
+</body>
+
+<footer class=" footer footer-center p-10 text-base-content rounded">
+    <nav class="grid grid-flow-col gap-4 text-base font-bold">
+        <a class="link link-hover">About us</a>
+        <a class="link link-hover">Contact</a>
+        <a class="link link-hover">Jobs</a>
+        <a class="link link-hover">Press kit</a>
+    </nav>
+    <nav class="text-xs">
+        <div class="grid grid-flow-col gap-4">
+            <p>(주)영규 | BIRTHDAY 1997-03-17 [happy birth day] | OWNER 영규 | 대전광역시 대덕구 중리동</p>
+        </div>
+        <div class="grid grid-flow-col gap-4">
+            <p>TEL 010-2282-3232 | EMAIL alsdudrb123@gmail.com | ONLINE PERMIT TO 대전 대덕구 | 영규(주)</p>
+        </div>
+    </nav>
+    <aside>
+        <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+    </aside>
+</footer>
+
+
+
+
+</html>
+
+<script>
+
+    $(document).ready(function () {
+  $(".open-btn-1").click(function () {
+    $(".content-1").addClass("active");
+  });
+  $(".open-btn-2").click(function () {
+    $(".content-2").addClass("active");
+  });
+  $(".open-btn-3").click(function () {
+    $(".content-3").addClass("active");
+  });
+  $(".open-btn-4").click(function () {
+    $(".content-4").addClass("active");
+  });
+  $(".open-btn-5").click(function () {
+    $(".content-5").addClass("active");
+  });
+  $(".open-btn-6").click(function () {
+    $(".content-6").addClass("active");
+  });
+
+  $(".inner").click(function () {
+    $(".content-1").removeClass("active");
+    $(".content-2").removeClass("active");
+    $(".content-3").removeClass("active");
+    $(".content-4").removeClass("active");
+    $(".content-5").removeClass("active");
+    $(".content-6").removeClass("active");
+  });
+});
+
+</script>
+
+<style>
+
+    /* 노멀라이즈 */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body,
+ul,
+li {
+  list-style: none;
+  /* font-family: "Montserrat", sans-serif; */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.content {
+  background-color: #fafafa;
+  /* border: 2px solid; */
+  display: none; /* 초기에 숨김 */
+  position: absolute;
+  z-index: 1;
+  /* +버튼 위에생기게해줌 */
+  margin: 0 auto;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  width: 1440px; /* 너비 설정 */
+  height: 660px; /* 높이 설정 */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+/* 클릭했을때 실행되는 식 */
+.content-1.active,
+.content-2.active,
+.content-3.active,
+.content-4.active,
+.content-5.active,
+.content-6.active {
+  display: flex;
+  justify-content: end;
+}
+
+/* =================옵션 이미지=================== */
+.content > .option-box {
+  /* border: 1px solid darkblue; */
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+.content > .option-box > img {
+  /* border: 1px solid orangered; */
+  width: 900px;
+  height: 500px;
+  object-fit: cover;
+}
+
+/* =================옵션 텍스트=================== */
+/* 옵션 텍스트 */
+.text {
+  /* border: 1px solid indianred; */
+  text-align: start;
+  margin-left: 5px;
+  margin-right: 5px;
+  height: 500px;
+}
+.text > ul {
+  /* border: 1px solid red; */
+}
+.text > ul > li {
+  /* border: 1px solid blue; */
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 25px;
+  font-weight: 400;
+  color: #252525;
+  line-height: 1.4;
+}
+.tit {
+  /* background-color: tomato; */
+  text-align: start;
+  font-size: 38px;
+  font-weight: 500;
+  color: #131313;
+  line-height: 1.1;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* =================텍스트 스타일================= */
+/* 텍스트 스타일효과 */
+.text h1 {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.5em;
+  padding-bottom: 15px;
+  position: relative;
+}
+.text h1:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 5px;
+  width: 50px;
+  background-color: #111;
+}
+.text h1:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  height: 1px;
+  width: 90%;
+  max-width: 255px;
+  background-color: #333;
+}
+
+/* =================배경 이미지================= */
+/* 이미지 배경 */
+.img-container-box {
+  height: calc(100vh - 40px); /* 스크롤이 생기지 않도록 조정 */
+  box-sizing: border-box;
+  /* border: 1px solid red; */
+  /* position: relative; */
+}
+
+.img-container-box > .background-img {
+  /* border: 1px solid orange; */
+  z-index: 1;
+  /* 이미지를 아래로 내리기 위한 설정 */
+}
+
+.img-container-box > .background-img > img {
+  /* border: 1px solid blue; */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ======닫기버튼===== */
+.outer {
+  /* border: 1px solid blue; */
+  position: relative;
+  margin: auto;
+  width: 55px;
+  margin-top: 1px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.inner {
+  width: inherit;
+  text-align: center;
+}
+
+label {
+  font-size: 0.8em;
+  line-height: 4em;
+  text-transform: uppercase;
+  color: black;
+  transition: all 0.3s ease-in;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.inner:before,
+.inner:after {
+  position: absolute;
+  content: "";
+  height: 1px;
+  width: inherit;
+  background: #444;
+  left: 0;
+  transition: all 0.3s ease-in;
+}
+
+.inner:before {
+  top: 50%;
+  transform: rotate(45deg);
+}
+
+.inner:after {
+  bottom: 50%;
+  transform: rotate(-45deg);
+}
+
+.outer:hover label {
+  opacity: 1;
+}
+
+.outer:hover .inner:before,
+.outer:hover .inner:after {
+  transform: rotate(0);
+}
+
+.outer:hover .inner:before {
+  top: 0;
+}
+
+.outer:hover .inner:after {
+  bottom: 0;
+}
+
+/* 버튼스타일 */
+/* ===========!!버튼위치수정해!!============ */
+.container-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  position: absolute;
+  /* border: 1px solid blue; */
+  left: 50%;
+  top: 35%;
+}
+.container-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  position: absolute;
+  /* border: 1px solid blue; */
+  left: 56%;
+  top: 2%;
+}
+.container-3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  position: absolute;
+  /* border: 1px solid red; */
+  left: 44%;
+  top: 65%;
+}
+.container-4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  position: absolute;
+  /* border: 1px solid orange; */
+  left: 46%;
+  top: 2%;
+}
+.container-5 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  position: absolute;
+  /* border: 1px solid indigo; */
+  left: 28%;
+  top: 22%;
+}
+.container-6 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  position: absolute;
+  /* border: 1px solid yellow; */
+  left: 70%;
+  top: 55%;
+}
+
+.box2 .btn {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  flex: 1 1 auto;
+  margin: 3px;
+  /* padding: 10px; */
+  /* border: 1px solid red; */
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  font-size: 15px;
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px #eee;
+  border-radius: 50%;
+}
+.open-box > .container > .btn > p {
+  /* border: 1px solid red; */
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.btn:hover {
+  background-position: right center;
+}
+
+.open-btn {
+  background-image: linear-gradient(
+    to right,
+    #25aae1,
+    #4481eb,
+    #04befe,
+    #3f86ed
+  );
+  box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+}
+
+
+
+</style>

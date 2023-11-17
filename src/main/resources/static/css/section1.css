@@ -1,0 +1,57 @@
+.section-1 {
+    background-image:  url("https://www.hyundai.com/static/images/model/santafe/23fc/the_all_new_santafe_design.jpg");
+
+     background-size: cover;
+
+    background-color: rgba(0, 0, 0, 0.7);
+      text-align: center; /* 가로 중앙 정렬 */
+}
+
+
+.video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1; /* Place the video behind other content */
+}
+
+.video-container video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Prevent interactions with the video */
+}
+
+.section1-text-section{
+
+
+}
+
+.bg-color {
+        position:absolute;
+        width:100%;
+        height:100%;
+        z-index=1;
+            background-color:rgba(5,5,5,0.5);
+
+}
+
+
+
+.section1-text-container {
+   display:inline-block;
+    text-align:center;
+    width:800px;
+    font-size:30px;
+    height:150px;
+     position:absolute;
+     top:50%;
+     left:50%;
+     transform: translate(-50%,-50%);
+         font-weight:bold;
+         color:white;
+
+}
